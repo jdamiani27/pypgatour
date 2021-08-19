@@ -28,10 +28,10 @@ class LeaderboardClient:
         return response.json()
 
     def leaderboard(self, tour_code: str, schedule_year: int, tournament_id: str) -> Dict[str, Any]:
-        endpoint = f"{LeaderboardClient.BASE_URL}/{schedule_year}/{tour_code}/{tournament_id}/leaderboard.json"
+        endpoint = f"{self.BASE_URL}/{schedule_year}/{tour_code}/{tournament_id}/leaderboard.json"
         return self._make_request(endpoint)
 
     def player_round_shots(self, tour_code: str, schedule_year: int, tournament_id: str, round_number: int,
                            player_id: str) -> Dict[str, Any]:
-        endpoint = f"{LeaderboardClient.BASE_URL}/{schedule_year}/{tour_code}/{tournament_id}/drawer/r{round_number}-m{player_id}.json"
+        endpoint = f"{self.BASE_URL}/{schedule_year}/{tour_code}/{tournament_id}/drawer/r{round_number}-m{player_id}.json"
         return self._make_request(endpoint)
