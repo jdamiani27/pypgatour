@@ -35,3 +35,7 @@ class LeaderboardClient:
                            player_id: str) -> Dict[str, Any]:
         endpoint = f"{self.BASE_URL}/{schedule_year}/{tour_code}/{tournament_id}/drawer/r{round_number}-m{player_id}.json"
         return self._make_request(endpoint)
+
+    def course(self, tour_code: str, schedule_year: int, tournament_id: str, course_id: str) -> Dict[str, Any]:
+        endpoint = f"{self.BASE_URL}/{schedule_year}/{tour_code}/{tournament_id}/course{course_id}.json"
+        return self._make_request(endpoint)
