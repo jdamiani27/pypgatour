@@ -2,7 +2,7 @@ import requests
 import logging
 from js2py.internals import seval
 from typing import Dict, Any
-from .models import Leaderboard
+from .models import Leaderboard, ShotTracker
 
 
 class LeaderboardClient:
@@ -38,16 +38,16 @@ class LeaderboardClient:
         endpoint = f"{self.BASE_URL}/{schedule_year}/{tour_code}/{tournament_id}/leaderboard.json"
         return Leaderboard.parse_obj(self._make_request(endpoint))
 
-    def player_round_shots(
+    def shot_tracker(
         self,
         tour_code: str,
         schedule_year: int,
         tournament_id: str,
         round_number: int,
         player_id: str,
-    ) -> Dict[str, Any]:
+    ) -> ShotTracker:
         endpoint = f"{self.BASE_URL}/{schedule_year}/{tour_code}/{tournament_id}/drawer/r{round_number}-m{player_id}.json"
-        return self._make_request(endpoint)
+        return ShotTracker.parse_obj(self._make_request(endpoint))
 
     def course(
         self, tour_code: str, schedule_year: int, tournament_id: str, course_id: str
