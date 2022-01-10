@@ -2,7 +2,7 @@ import requests
 import logging
 from js2py.internals import seval
 from typing import Dict, Any
-from .models import Leaderboard, ShotTracker
+from .models import Leaderboard, ShotTracker, Course
 
 
 class LeaderboardClient:
@@ -51,6 +51,6 @@ class LeaderboardClient:
 
     def course(
         self, tour_code: str, schedule_year: int, tournament_id: str, course_id: str
-    ) -> Dict[str, Any]:
+    ) -> Course:
         endpoint = f"{self.BASE_URL}/{schedule_year}/{tour_code}/{tournament_id}/course{course_id}.json"
-        return self._make_request(endpoint)
+        return Course.parse_obj(self._make_request(endpoint))
