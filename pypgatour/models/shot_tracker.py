@@ -50,15 +50,13 @@ class ShotTrackerDataPicklePlayerHolePlayerShots(CamelizedModel):
     shottext: str
 
     class Config(CamelizedModel.Config):
-        fields = {
-            'from_': 'from'
-        }
+        fields = {"from_": "from"}
 
 
 class ShotTrackerDataPicklePlayerHolePlayer(CamelizedModel):
     player_id: str
     shots: List[ShotTrackerDataPicklePlayerHolePlayerShots]
-  
+
 
 class ShotTrackerDataPicklePlayerHole(CamelizedModel):
     hole_id: str
@@ -149,7 +147,12 @@ class ScoreCardPageLineStatus(CamelizedModel):
 
 
 ScoreCardPageLine = Annotated[
-    Union[ScoreCardPageLineHole, ScoreCardPageLinePar, ScoreCardPageLinePlayerData, ScoreCardPageLineStatus],
+    Union[
+        ScoreCardPageLineHole,
+        ScoreCardPageLinePar,
+        ScoreCardPageLinePlayerData,
+        ScoreCardPageLineStatus,
+    ],
     Field(discriminator="line_type"),
 ]
 
@@ -159,7 +162,6 @@ class ScoreCardPage(CamelizedModel):
     is_first_page: bool
     page_index: int
     is_last_page: bool
-
 
 
 class ScoreCards(CamelizedModel):
@@ -255,9 +257,9 @@ class ShotTracker(CamelizedModel):
     course_id: str
     round_selector: RoundSelector
     players_data: PlayersData
-    shot_tracker: ShotTrackerData 
+    shot_tracker: ShotTrackerData
     score_cards: ScoreCards
-    play_by_play: PlayByPlay 
+    play_by_play: PlayByPlay
     statistics: Statistics
     msg_id: str
     last_updated: datetime
